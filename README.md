@@ -1,4 +1,4 @@
-<h1 alignment="center"> Installation </>
+<h1 alignment="center"> Installation </h1>
 
 * init project
 
