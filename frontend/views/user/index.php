@@ -1,5 +1,6 @@
 <?php
 
+use common\models\User;
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -28,12 +29,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'username',
-            'auth_key',
-            'password_hash',
-            'password_reset_token',
+//            'auth_key',
+//            'password_hash',
+//            'password_reset_token',
             //'email:email',
-            //'status',
-            //'created_at',
+            [
+                "attribute" => 'status',
+                "format" => "raw",
+                "value" =>  function ($data) {
+                    return $data->status === User::STATUS_INACTIVE
+                        ? '<span class="badge label label-warning">Inactive</span>'
+                        : '<span class="badge label-success">Active</span>';
+                }
+],
+
+            [
+                    "attribute" => "created_at",
+                "value" => function ($data) {
+                    return date("d-m-Y", $data->created_at);
+                }
+            ],
             //'updated_at',
             //'verification_token',
 

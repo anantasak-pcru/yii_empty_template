@@ -1,7 +1,9 @@
 <?php
-use yii\helpers\Html;
 
-/* @var $this \yii\web\View */
+use yii\helpers\Html;
+use yii\web\View;
+
+/* @var $this View */
 /* @var $content string */
 ?>
 
@@ -230,7 +232,7 @@ use yii\helpers\Html;
                 <li class="dropdown user user-menu">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
-                        <span class="hidden-xs">Alexander Pierce</span>
+                        <span class="hidden-xs"><?= Yii::$app->user->identity->username ?? "Anonymous" ?></span>
                     </a>
                     <ul class="dropdown-menu">
                         <!-- User image -->
@@ -258,14 +260,28 @@ use yii\helpers\Html;
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                                <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <?php
+                                if (!Yii::$app->user->isGuest) {
+                                    echo '<a href="#" class="btn btn-default btn-flat">Profile</a>';
+                                }
+                                ?>
                             </div>
                             <div class="pull-right">
-                                <?= Html::a(
-                                    'Sign out',
-                                    ['/site/logout'],
-                                    ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
-                                ) ?>
+                                <?php
+                                if (!Yii::$app->user->isGuest) {
+                                    echo Html::a(
+                                        'Sign out',
+                                        ['/site/logout'],
+                                        ['data-method' => 'post', 'class' => 'btn btn-default btn-flat']
+                                    );
+                                } else {
+                                    echo Html::a(
+                                        'Login',
+                                        ['/site/login'],
+                                        ['class' => 'btn btn-default btn-flat']
+                                    );
+                                }
+                                ?>
                             </div>
                         </li>
                     </ul>

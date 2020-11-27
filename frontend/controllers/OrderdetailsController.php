@@ -6,7 +6,6 @@ use frontend\models\Products;
 use Yii;
 use frontend\models\Orderdetails;
 use frontend\models\OrderdetailsSearch;
-use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -23,7 +22,7 @@ class OrderdetailsController extends Controller
     {
         return [
             'verbs' => [
-                'class' => VerbFilter::className(),
+                'class' => VerbFilter::class,
                 'actions' => [
                     'delete' => ['POST'],
                 ],

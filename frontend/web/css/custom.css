@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Sarabun');
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+* {
+    font-family: 'Sarabun', sans-serif;
+}
+
+.hover-grey > :hover {
+    background: #eeee;
+}
+
+.aaa {
+    background: greenyellow;
+}
+
+.fc-content {
+    font-size: 200px !important;
+}

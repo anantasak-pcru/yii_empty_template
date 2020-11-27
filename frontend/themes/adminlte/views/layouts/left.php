@@ -1,3 +1,11 @@
+<?php
+
+use common\models\User;
+
+
+$status = Yii::$app->user->identity->status ?? -1;
+
+?>
 <aside class="main-sidebar">
 
     <section class="sidebar">
@@ -8,9 +16,23 @@
                 <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle" alt="User Image"/>
             </div>
             <div class="pull-left info">
-                <p>Alexander Pierce</p>
+                <p><?= @Yii::$app->user->identity->username ; ?></p>
 
-                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                <a href="#"><i class="fa fa-circle text-<?= $status === User::STATUS_ACTIVE ? "success" : ($status === User::STATUS_INACTIVE ? "warning" : ($status === User::STATUS_DELETED ? "danger" : "purple")) ?>"></i><?php
+                    switch ($status) {
+                        case User::STATUS_ACTIVE:
+                            echo  "ACTIVE";
+                            break;
+                        case User::STATUS_DELETED:
+                            echo "DELETED";
+                            break;
+                        case User::STATUS_INACTIVE:
+                            echo "INACTIVE";
+                            break;
+                        default:
+                            echo "ANONYMOUS";
+                    }
+                    ?></a>
             </div>
         </div>
 
@@ -33,6 +55,8 @@
                     ['label' => 'Menu Yii2', 'options' => ['class' => 'header']],
                     ['label' => 'Gii', 'icon' => 'file-code-o', 'url' => ['/gii']],
                     ['label' => 'Debug', 'icon' => 'dashboard', 'url' => ['/debug']],
+                    ['label' => 'Rooms', 'icon' => 'bed', 'url' => ['/rooms'], 'visible' => !Yii::$app->user->isGuest],
+                    ['label' => 'Calendar', 'icon' => 'calendar', 'url' => ['/rooms/calendar'], 'visible' => !Yii::$app->user->isGuest],
                     ['label' => 'Login', 'url' => ['site/login'], 'visible' => Yii::$app->user->isGuest],
                     [
                         'label' => 'Some tools',

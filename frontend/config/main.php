@@ -12,11 +12,20 @@ return [
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
+        'assetManager' => [
+            'bundles' => [
+                'kartik\form\ActiveFormAsset' => [
+                    'bsDependencyEnabled' => false // do not load bootstrap assets for a specific asset bundle
+                ],
+            ],
+        ],
         'view' => [
             'theme' => [
                 'pathMap' => [
 //                    '@app/views' => '@vendor/dmstr/yii2-adminlte-asset/example-views/yiisoft/yii2-app'
-                    '@app/views' => '@frontend/themes/adminlte/views/'
+//                    '@app/views' => '@frontend/themes/adminlte/views/'
+                    '@app/views' => '@frontend/themes/adminlte3/views/'
+//                    '@app/views' => '@vendor/hail812/yii2-adminlte3/src/views'
                 ],
             ],
         ],
