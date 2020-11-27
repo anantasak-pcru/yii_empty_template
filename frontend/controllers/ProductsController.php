@@ -29,6 +29,16 @@ class ProductsController extends Controller
         ];
     }
 
+    public function actionDyno() {
+        $searchModel = new ProductsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('a', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
     /**
      * Lists all Products models.
      * @return mixed
