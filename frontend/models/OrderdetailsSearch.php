@@ -49,6 +49,8 @@ class OrderdetailsSearch extends Orderdetails
         $query = Orderdetails::find();
 //        $query->joinWith([Products::tableName()]);
         $query->leftJoin(Products::tableName(), 'products.productCode=orderdetails.productCode');
+        var_dump($query->createCommand()->rawSql);
+        return
 
         // add conditions that should always apply here
 
